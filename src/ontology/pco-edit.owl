@@ -22,6 +22,14 @@ obo:pco.owl a owl:Ontology ;
 # #################################################################
 # 
 # 
+# http://purl.obolibrary.org/obo/IAO_0000231
+
+obo:IAO_0000231 a owl:AnnotationProperty .
+# 
+# http://purl.obolibrary.org/obo/IAO_0100001
+
+obo:IAO_0100001 a owl:AnnotationProperty .
+# 
 # http://purl.obolibrary.org/obo/IAO_created_by
 
 obo:IAO_created_by a owl:AnnotationProperty .
@@ -108,7 +116,8 @@ obo:GO_0051704 a owl:Class ;
 # 
 # http://purl.obolibrary.org/obo/IAO_0000030
 
-obo:IAO_0000030 rdfs:subClassOf obo:BFO_0000031 .
+obo:IAO_0000030 a owl:Class ;
+	rdfs:subClassOf obo:BFO_0000031 .
 # 
 # http://purl.obolibrary.org/obo/PCO_0000000
 
@@ -275,7 +284,7 @@ _:genid22 a owl:Restriction ;
 
 obo:PCO_0000005 obo:IAO_0000114 obo:IAO_0000123 ;
 	obo:IAO_0000115 "A process that has as primary participant a population. "@en ;
-	rdfs:comment "Includes processes such as population growth, extinction, evolution, selection, and adaptation. Population processes may depend on the processes of individual organisms {e.g., population growth reflects the cumulative multicellular organism reproduction (GO:0032504) and death (GO:0016265) of all individuals in a population}, but cannot be described for an individual organism. Some of these processes (e.g., evolution, extinction) can also occur at the species level, so PCO distinguishes between, for example, population extinction and species extinction. The GO has the terms 'multi-organism process' (GO:0051704) and 'intraspecies interactions between organisms' (GO:0051703), but tPCOhese categories are only defined for interactions between two individuals. It is unclear at this point if 'biological process' (GO:0008150) encompasses population processes. "@en ;
+	rdfs:comment "Includes processes such as population growth, extinction, evolution, selection, and adaptation. Population processes may depend on the processes of individual organisms {e.g., population growth reflects the cumulative multicellular organism reproduction (GO:0032504) and death (GO:0016265) of all individuals in a population}, but cannot be described for an individual organism. Some of these processes (e.g., evolution, extinction) can also occur at the species level, so PCO distinguishes between, for example, population extinction and species extinction. The GO has the terms 'multi-organism process' (GO:0051704) and 'intraspecies interactions between organisms' (GO:0051703), but these PCO categories are only defined for interactions between two individuals. It is unclear at this point if 'biological process' (GO:0008150) encompasses population processes."@en ;
 	rdfs:label "population process"@en .
 # 
 # http://purl.obolibrary.org/obo/PCO_0000006
@@ -625,18 +634,54 @@ obo:PCO_0000031 rdfs:subClassOf obo:BFO_0000040 ;
 	obo:IAO_0000115 "A material entity that is one or more organisms, viruses or viroids." ;
 	rdfs:label "organismal entity"@en .
 # 
+# http://purl.obolibrary.org/obo/PCO_0000032
+
+obo:PCO_0000032 a owl:Class ;
+	owl:equivalentClass _:genid48 .
+
+_:genid48 owl:intersectionOf _:genid51 .
+
+_:genid51 a rdf:List ;
+	rdf:first obo:PATO_0000001 ;
+	rdf:rest _:genid49 .
+
+_:genid49 a rdf:List ;
+	rdf:first _:genid50 .
+
+_:genid50 a owl:Restriction ;
+	owl:onProperty obo:RO_0000052 ;
+	owl:someValuesFrom obo:PCO_0000000 .
+
+_:genid49 rdf:rest rdf:nil .
+
+_:genid48 a owl:Class .
+
+obo:PCO_0000032 obo:IAO_0000115 "A quality that inheres in a biological population."@en ;
+	obo:IAO_0000116 "See Chris's comments on population qualities at: http://code.google.com/p/popcomm-ontology/issues/detail?id=4. These may not belong under BFO:quality. May be better to call them population characteristics, and classify as specifically dependent continuants. Need to look at process profiles in BFO2."@en ;
+	rdfs:comment "Includes qualities like population size, population growth rate, carrying capacity, immigration rate, emigration rate, fecundity, and death rate. A population quality may depend on the qualities of individual organisms in the population, but cannot be measured or described for a single organism. This term may be replaced by a PATO term."@en ;
+	rdfs:label "quality of a collection of organisms"@en .
+# 
+# http://purl.obolibrary.org/obo/PCO_0000033
+
+obo:PCO_0000033 a owl:Class ;
+	rdfs:subClassOf obo:PATO_0001241 ;
+	obo:IAO_0000114 obo:IAO_0000428 ;
+	obo:IAO_0000115 "A quality which inheres in a collection of organisms." ;
+	obo:IAO_0000116 "See Chris's comments on population qualities at: http://code.google.com/p/popcomm-ontology/issues/detail?id=4. These may not belong under BFO:quality. May be better to call them population characteristics, and classify as specifically dependent continuants. Need to look at process profiles in BFO2." ;
+	rdfs:label "quality of a collection of organisms"@en .
+# 
 # http://purl.obolibrary.org/obo/PCO_0001000
 
 obo:PCO_0001000 a owl:Class ;
-	rdfs:subClassOf obo:BFO_0000040 , _:genid48 .
+	rdfs:subClassOf obo:BFO_0000040 , _:genid52 .
 
-_:genid48 a owl:Restriction ;
+_:genid52 a owl:Restriction ;
 	owl:onProperty obo:RO_0002351 ;
 	owl:allValuesFrom obo:CARO_0001010 .
 
-obo:PCO_0001000 rdfs:subClassOf _:genid49 .
+obo:PCO_0001000 rdfs:subClassOf _:genid53 .
 
-_:genid49 a owl:Restriction ;
+_:genid53 a owl:Restriction ;
 	owl:onProperty obo:RO_0002351 ;
 	owl:qualifiedCardinality "2"^^xsd:nonNegativeInteger ;
 	owl:onClass obo:CARO_0001010 .
@@ -646,29 +691,29 @@ obo:PCO_0001000 rdfs:label "pair of interacting organisms"@en .
 # http://purl.obolibrary.org/obo/PCO_0001001
 
 obo:PCO_0001001 a owl:Class ;
-	owl:equivalentClass _:genid50 .
+	owl:equivalentClass _:genid54 .
 
-_:genid50 owl:intersectionOf _:genid54 .
+_:genid54 owl:intersectionOf _:genid58 .
 
-_:genid54 a rdf:List ;
+_:genid58 a rdf:List ;
 	rdf:first obo:PCO_0001000 ;
-	rdf:rest _:genid51 .
+	rdf:rest _:genid55 .
 
-_:genid51 a rdf:List ;
-	rdf:first _:genid52 .
+_:genid55 a rdf:List ;
+	rdf:first _:genid56 .
 
-_:genid52 a owl:Restriction ;
+_:genid56 a owl:Restriction ;
 	owl:onProperty obo:RO_0002351 ;
-	owl:allValuesFrom _:genid53 .
+	owl:allValuesFrom _:genid57 .
 
-_:genid53 a owl:Restriction ;
+_:genid57 a owl:Restriction ;
 	owl:onProperty obo:RO_0002350 ;
 	owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
 	owl:onClass obo:PCO_0000017 .
 
-_:genid51 rdf:rest rdf:nil .
+_:genid55 rdf:rest rdf:nil .
 
-_:genid50 a owl:Class .
+_:genid54 a owl:Class .
 
 obo:PCO_0001001 rdfs:subClassOf obo:PCO_0001000 ;
 	rdfs:label "pair of interacting organisms of the same species"@en .
@@ -676,9 +721,9 @@ obo:PCO_0001001 rdfs:subClassOf obo:PCO_0001000 ;
 # http://purl.obolibrary.org/obo/PCO_1000000
 
 obo:PCO_1000000 a owl:Class ;
-	rdfs:subClassOf obo:PCO_0000001 , _:genid55 .
+	rdfs:subClassOf obo:PCO_0000001 , _:genid59 .
 
-_:genid55 a owl:Restriction ;
+_:genid59 a owl:Restriction ;
 	owl:onProperty obo:RO_0000056 ;
 	owl:someValuesFrom obo:PCO_1000001 .
 
@@ -699,9 +744,9 @@ obo:PCO_1000001 a owl:Class ;
 # http://purl.obolibrary.org/obo/PCO_1000002
 
 obo:PCO_1000002 a owl:Class ;
-	rdfs:subClassOf obo:PCO_1000001 , _:genid56 .
+	rdfs:subClassOf obo:PCO_1000001 , _:genid60 .
 
-_:genid56 a owl:Restriction ;
+_:genid60 a owl:Restriction ;
 	owl:onProperty obo:RO_0000057 ;
 	owl:someValuesFrom obo:PCO_0000027 .
 
@@ -714,9 +759,9 @@ obo:PCO_1000002 obo:IAO_0000114 obo:IAO_0000123 ;
 # http://purl.obolibrary.org/obo/PCO_1000003
 
 obo:PCO_1000003 a owl:Class ;
-	rdfs:subClassOf obo:PCO_0000027 , _:genid57 .
+	rdfs:subClassOf obo:PCO_0000027 , _:genid61 .
 
-_:genid57 a owl:Restriction ;
+_:genid61 a owl:Restriction ;
 	owl:onProperty obo:RO_0000056 ;
 	owl:someValuesFrom obo:PCO_1000002 .
 
@@ -746,11 +791,27 @@ obo:PCO_1001176 a owl:Class ;
 	obo:IAO_0000116 "Axiomatise with ENVO's ecosystem and habitat fragmentation classes once released." ;
 	rdfs:label "population fragmentation"@en .
 
-_:genid58 a owl:Axiom ;
+_:genid62 a owl:Axiom ;
 	owl:annotatedSource obo:PCO_1001176 ;
 	owl:annotatedProperty obo:IAO_0000115 ;
 	owl:annotatedTarget "A process during which members of an ecological population are prevented, either partially or completely, from interacting with one another due to discontinuities in their ecosystem or behavioural changes, and which leads to reduced genetic diversity." ;
 	<http://www.geneontology.org/formats/oboInOwl#hasDbXref> "https://en.wikipedia.org/wiki/Population_fragmentation" .
+# 
+# http://purl.obolibrary.org/obo/PCO_1001177
+
+obo:PCO_1001177 a owl:Class ;
+	rdfs:subClassOf obo:PCO_0000005 ;
+	obo:IAO_0000114 obo:IAO_0000428 ;
+	obo:IAO_0000115 "A process during which genetic variation and selection within one ecological population results in the formation of two or more new populations over evolutionary time." ;
+	<http://www.geneontology.org/formats/oboInOwl#hasRelatedSynonym> "speciation" ;
+	rdfs:comment "This class refers to the process whereby a single ecological population, considered to have members of a single species, splits into two or more populations, considered to be of different species. The evolutionary process of speciation is a necessary part of this process." ;
+	rdfs:label "population divergence due to speciation"@en .
+
+_:genid63 a owl:Axiom ;
+	owl:annotatedSource obo:PCO_1001177 ;
+	owl:annotatedProperty obo:IAO_0000115 ;
+	owl:annotatedTarget "A process during which genetic variation and selection within one ecological population results in the formation of two or more new populations over evolutionary time." ;
+	<http://www.geneontology.org/formats/oboInOwl#hasDbXref> "https://en.wikipedia.org/wiki/Speciation" .
 # 
 # http://purl.obolibrary.org/obo/pco.owl/PCO_0000030
 
